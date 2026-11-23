@@ -1,0 +1,134 @@
+/*
+ * main.css — Han Yang 个人主页样式（极简学术风，参考 al-folio）
+ *
+ * 用法：
+ *   - 主题色：INTJ（16personalities 紫人组 Analysts）紫 #88619a；暗色模式用提亮的 #b590c9。
+ *     改色时同时改 :root 和 [data-theme="dark"] 里的 --accent / --badge-bg。
+ *   - 暗色模式：[data-theme="dark"] 下的变量；index.html 右上角按钮切换，选择存在 localStorage。
+ *   - 新增板块无需改 CSS：直接复用 <section> + <h2 class="section-title">。
+ */
+
+:root {
+  --accent: #88619a;
+  --text: #212529;
+  --muted: #6c757d;
+  --bg: #ffffff;
+  --nav-bg: rgba(255, 255, 255, 0.95);
+  --border: #e5e5e5;
+  --badge-bg: #88619a;
+  --badge-text: #ffffff;
+  --shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] {
+  --accent: #b590c9;
+  --text: #e8e8e8;
+  --muted: #a0a0a0;
+  --bg: #1c1c1d;
+  --nav-bg: rgba(28, 28, 29, 0.95);
+  --border: #3a3a3c;
+  --badge-bg: #88619a;
+  --badge-text: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Roboto", -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  transition: background 0.2s, color 0.2s;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container { max-width: 930px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- 顶部导航 ---------- */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+.navbar .container { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+.social a { color: var(--text); font-size: 1.25rem; margin-right: 14px; }
+.social a:hover { color: var(--accent); text-decoration: none; }
+.nav-links { display: flex; align-items: center; gap: 18px; }
+.nav-links a { color: var(--text); font-weight: 400; }
+.nav-links a:hover { color: var(--accent); text-decoration: none; }
+#theme-toggle {
+  background: none; border: none; cursor: pointer; padding: 0;
+  color: var(--text); font-size: 1.1rem;
+}
+#theme-toggle:hover { color: var(--accent); }
+
+main.container { padding-top: 88px; padding-bottom: 40px; }
+
+/* ---------- 头部：姓名 + 简介 + 照片 ---------- */
+.post-title { font-size: 2.6rem; font-weight: 300; margin: 0 0 4px; }
+.post-title b { font-weight: 700; }
+.post-title .cn-name { font-size: 1.4rem; color: var(--muted); margin-left: 6px; }
+.desc { color: var(--muted); margin: 0 0 24px; }
+
+.profile { float: right; width: 30%; max-width: 260px; margin: 0 0 16px 24px; }
+.profile img { width: 100%; border-radius: 4px; box-shadow: var(--shadow); display: block; }
+.profile .more-info { font-size: 0.85rem; color: var(--muted); text-align: center; margin-top: 8px; }
+
+.about p { margin: 0 0 14px; }
+.about::after { content: ""; display: table; clear: both; }
+
+/* ---------- 板块标题 ---------- */
+.section-title {
+  font-size: 1.6rem; font-weight: 400; color: var(--accent);
+  margin: 36px 0 12px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- News ---------- */
+.news { width: 100%; border-collapse: collapse; }
+.news td { vertical-align: top; padding: 4px 0; }
+.news td.date { white-space: nowrap; font-weight: 500; width: 110px; padding-right: 16px; }
+
+/* ---------- Publications ---------- */
+.pub { display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px dashed var(--border); }
+.pub:last-child { border-bottom: none; }
+.pub .thumb { flex: 0 0 200px; position: relative; }
+.pub .thumb img { width: 100%; border-radius: 4px; box-shadow: var(--shadow); display: block; }
+.pub .abbr {
+  position: absolute; top: 6px; left: 6px;
+  background: var(--badge-bg); color: var(--badge-text);
+  font-size: 0.72rem; font-weight: 500; padding: 1px 8px; border-radius: 3px;
+}
+.pub .body { flex: 1; min-width: 0; }
+.pub .title { font-weight: 500; }
+.pub .author { font-size: 0.95rem; }
+.pub .author .me { font-weight: 500; text-decoration: underline; }
+.pub .periodical { font-style: italic; color: var(--muted); font-size: 0.95rem; }
+.pub .links { margin-top: 6px; }
+.pub .links a {
+  display: inline-block; font-size: 0.75rem; font-weight: 400;
+  border: 1px solid var(--text); color: var(--text);
+  padding: 1px 10px; margin: 0 6px 6px 0; border-radius: 3px;
+}
+.pub .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+/* ---------- 页脚 ---------- */
+footer { border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; text-align: center; padding: 14px 0; }
+
+/* ---------- 手机 ---------- */
+@media (max-width: 640px) {
+  .post-title { font-size: 2rem; }
+  .profile { float: none; width: 60%; margin: 0 auto 20px; }
+  .pub { flex-direction: column; gap: 10px; }
+  .pub .thumb { flex: none; max-width: 320px; }
+  .nav-links { gap: 10px; font-size: 0.85rem; }
+  .social a { margin-right: 10px; }
+}
